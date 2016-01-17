@@ -10,12 +10,10 @@ from twinkle import twinkle
 
 
 # The light programs we want to run, repeated endlessly
-programs = iter(cycle([fade_in, forward, twinkle, reverse, fade_out]))
+programs = cycle([fade_in, forward, twinkle, reverse, fade_out])
 
 
-while True:
-    program = next(programs)
-
+for program in programs:
     # each program should run for at most 5 seconds
     until = time.time() + 5
 
