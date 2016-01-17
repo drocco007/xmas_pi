@@ -21,6 +21,7 @@ def source(gamma):
                 value = min(max(value, 0), gamma)
                 yield value
 
+
 def twinkle(gammas=(), until=sys.maxsize):
     sources = [source(gamma) for gamma in gammas]
     until = until + 10
