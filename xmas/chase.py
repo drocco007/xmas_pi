@@ -9,15 +9,14 @@ import time
 import sys
 
 
-def chase(gammas=(), until=sys.maxsize, forward=True):
+def chase(n_lights, until=sys.maxsize, forward=True):
     direction = 1 if forward else -1
 
     # start with the first light on and the rest off
-    lights = deque([True] + [False] * (len(gammas) - 1))
+    lights = deque([1.0] + [0.0] * (n_lights - 1))
 
     while time.time() < until:
-        yield [on and gamma or 0
-               for on, gamma in zip(lights, gammas)]
+        yield lights
         time.sleep(0.15)
         lights.rotate(direction)
 

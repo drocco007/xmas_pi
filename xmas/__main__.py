@@ -2,6 +2,7 @@ from itertools import cycle
 import time
 
 from lights import lights, gammas
+from util import normalize
 
 from chase import forward, reverse
 from fade import fade_in, fade_out
@@ -21,7 +22,12 @@ while True:
     # each program is a generator that, at each iteration, yields a list of
     # values, each corresponding to the brightness of the respective light,
     # from a minimum of 0.0 (off) to a maximum of 1.0 (full on)
-    for values in program(gammas, until=until):
+    for values in program(len(lights), until=until):
+
+        # Normalize each light's value according to its gamma (maximum
+        # brightness)
+        values = normalize(values, gammas)
+
         for i, value in enumerate(values):
 
             # Actually change the light's brightness; see
